@@ -1,0 +1,111 @@
+.help-page {
+    padding: 40px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f9f9f9;
+    font-family: 'Roboto', sans-serif;
+    max-width: 1200px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.help-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.help-header h1 {
+    font-size: 2.8rem;
+    color: #1f3a4e;
+    margin-bottom: 15px;
+}
+
+.help-header p {
+    font-size: 1.2rem;
+    color: #7d8a92;
+    line-height: 1.5;
+}
+
+.help-content {
+    margin: 0 auto;
+}
+
+.faqs,
+.user-guides,
+.contact-support {
+    margin-bottom: 50px;
+}
+
+.faqs h2,
+.user-guides h2,
+.contact-support h2 {
+    font-size: 2.2rem;
+    color: #1f3a4e;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e1e5ea;
+    padding-bottom: 10px;
+}
+
+.faq-item,
+.contact-item {
+    border-bottom: 1px solid #e1e5ea;
+    padding: 20px 0;
+}
+
+.faq-item h3 {
+    font-size: 1.4rem;
+    color: #004d7a;
+    margin-bottom: 12px;
+}
+
+.faq-item p {
+    font-size: 1.1rem;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+.user-guides ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-guides li {
+    margin-bottom: 12px;
+}
+
+.user-guides a {
+    color: #0056b3;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: color 0.3s, text-decoration 0.3s;
+}
+
+.user-guides a:hover {
+    color: #003d7a;
+    text-decoration: underline;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.contact-item span {
+    font-size: 1.2rem;
+    color: #0056b3;
+}
+
+.contact-item p {
+    margin-left: 12px;
+    font-size: 1.1rem;
+    color: #4a4a4a;
+}

@@ -1,0 +1,110 @@
+.inventory-container {
+  padding: 20px;
+  margin-top: 60px;
+  background-color: #f4f7fa;
+  border-radius: 15px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.inventory-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2e3a47;
+}
+
+.add-item-btn {
+  font-weight: 600;
+  font-size: 16px;
+  background-color: #009688;
+  border-color: #009688;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.add-item-btn:hover,
+.add-item-btn:focus {
+  background-color: #00796b;
+  border-color: #00796b;
+}
+
+.inventory-table {
+  background-color: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 15px;
+}
+
+.inventory-table .ant-table-thead > tr > th {
+  background-color: #009688;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 16px;
+  border-bottom: 2px solid #00796b;
+}
+
+.inventory-table .ant-table-tbody > tr > td {
+  font-size: 15px;
+  color: #4a5568;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.ant-modal-content {
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ant-modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2e3a47;
+}
+
+.ant-form-item-label > label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.ant-input,
+.ant-select-selector,
+.ant-input-number {
+  border-radius: 8px;
+  border-color: #d0d7de;
+  padding: 10px;
+}
+
+.ant-input:hover,
+.ant-select-selector:hover,
+.ant-input-number:hover {
+  border-color: #009688;
+}
+
+.ant-btn-primary {
+  background-color: #009688;
+  border-color: #009688;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 24px;
+  border-radius: 10px;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background-color: #00796b;
+  border-color: #00796b;
+}
+
+.ant-btn-primary[disabled],
+.ant-btn-primary[disabled]:hover,
+.ant-btn-primary[disabled]:focus {
+  background-color: #e2e8f0;
+  border-color: #e2e8f0;
+}

@@ -1,0 +1,266 @@
+.appointments-container {
+    padding: 20px;
+    margin-top: 80px;
+    background: linear-gradient(to right, #e2e2e2, #ffffff);
+    min-height: calc(100vh - 60px);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.appointments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.appointments-header h1 {
+    color: #333;
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.add-appointment-button {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-left: auto; /* Aligns button to the right */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-appointment-button:hover {
+    background: linear-gradient(45deg, #0056b3, #00408d);
+    transform: scale(1.02);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+}
+
+.search-icon {
+    margin-left: -30px;
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.appointments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.appointment-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease;
+}
+
+.appointment-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.appointment-card-header {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    padding: 16px;
+    border-bottom: 1px solid #00408d;
+}
+
+.appointment-name {
+    font-size: 1.2rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.appointment-name svg {
+    margin-right: 10px;
+}
+
+.appointment-card-body {
+    padding: 16px;
+    background: #f8f9fa;
+}
+
+.appointment-card-body p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.appointment-card-body .label {
+    font-weight: 600;
+    color: #007bff;
+}
+
+.appointment-card-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    background: #ffffff;
+    border-top: 1px solid #ececec;
+}
+
+.edit-button, .delete-button {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.edit-button {
+    background: #28a745;
+    color: white;
+}
+
+.edit-button:hover {
+    background: #218838;
+    transform: scale(1.03);
+}
+
+.delete-button {
+    background: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background: #c82333;
+    transform: scale(1.03);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.close-button {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.close-button:hover {
+    background: #c82333;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.submit-button {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+    background: linear-gradient(90deg, #0056b3, #00408d);
+    transform: scale(1.02);
+}
+
+.calendar-container {
+    margin-top: 30px;
+}
+
+.highlighted {
+    background: #d1ecf1 !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

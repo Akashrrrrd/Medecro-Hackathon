@@ -1,0 +1,117 @@
+.medical-tests-container {
+  padding: 20px;
+  background-color: #f7f9fc;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin-top: 100px;
+  position: relative;
+}
+
+.medical-tests-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+.medical-tests-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+}
+
+.add-test-btn {
+  background-color: #1890ff;
+  border-color: #1890ff;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.add-test-btn:hover,
+.add-test-btn:focus {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+  transform: scale(1.05);
+}
+
+.medical-tests-table {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.medical-tests-table:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.medical-tests-table .ant-table-thead > tr > th {
+  background-color: #1890ff;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.medical-tests-table .ant-table-tbody > tr > td {
+  font-size: 14px;
+  color: #555;
+}
+
+.action-buttons .ant-btn {
+  background-color: #1890ff;
+  border-color: #1890ff;
+  margin-right: 8px;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.action-buttons .ant-btn:hover {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+  transform: scale(1.05);
+}
+
+.add-test-modal .ant-modal-content {
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-test-modal .ant-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+}
+
+.add-test-modal .ant-form-item-label > label {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ant-form-item-control {
+  margin-bottom: 15px;
+}
+
+.ant-form-item-control-input {
+  border-radius: 6px;
+}
+
+.ant-btn-primary {
+  background-color: #1890ff;
+  border-color: #1890ff;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  background-color: #40a9ff;
+  border-color: #40a9ff;
+  transform: scale(1.05);
+}
