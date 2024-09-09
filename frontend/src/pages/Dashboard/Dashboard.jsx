@@ -51,7 +51,7 @@ const Dashboard = ({ patientsCount, appointmentsCount, upcomingAppointments }) =
     const cardData = [
         { icon: <FaUserInjured />, title: 'Patients', value: patientsCount },
         { icon: <FaCalendarAlt />, title: 'Appointments', value: appointmentsCount },
-        { icon: <FaClock />, title: 'Upcoming Appointments', value: upcomingAppointments }, // New metric
+        { icon: <FaClock />, title: 'Upcoming Appointments', value: upcomingAppointments }, 
         { icon: <FaChartLine />, title: 'Performance', value: '+8% This Month' },
     ];
 

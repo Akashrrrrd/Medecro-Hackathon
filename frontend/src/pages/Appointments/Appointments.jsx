@@ -5,10 +5,13 @@ import { FaUser, FaCalendar, FaClock, FaPhone, FaSearch } from 'react-icons/fa';
 
 const Appointments = ({ addAppointment }) => {
   const [appointments, setAppointments] = useState([
-    { id: 1, name: 'John Doe', date: '2024-08-20', time: '10:00', phone: '123-456-7890' },
-    { id: 2, name: 'Jane Smith', date: '2024-08-21', time: '11:00', phone: '987-654-3210' },
-    { id: 3, name: 'Akash R', date: '2024-08-19', time: '10:00', phone: '875-468-0977' },
-  ]);
+    { id: 1, name: 'Ananya Desai', date: '2024-08-20', time: '10:00', phone: '9823045691' },
+    { id: 2, name: 'Rahul Chatterjee', date: '2024-08-21', time: '11:00', phone: '9912567834' },
+    { id: 3, name: 'Sneha Nair', date: '2024-08-19', time: '10:00', phone: '9786543210' },
+    { id: 4, name: 'Arjun Kapoor', date: '2024-08-22', time: '14:00', phone: '9845123789' },
+    { id: 5, name: 'Pooja Mishra', date: '2024-08-23', time: '09:30', phone: '9954123678' },
+]);
+
   const [showModal, setShowModal] = useState(false);
   const [editingAppointment, setEditingAppointment] = useState(null);
   const [date, setDate] = useState(new Date());

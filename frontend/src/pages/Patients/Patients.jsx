@@ -21,24 +21,12 @@ const Patients = ({ patients, addPatient }) => {
     problem: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => {
     setShowModal(false);
     setError("");
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewPatient((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const handleAddPatient = () => {
-    if (Object.values(newPatient).some((field) => field === "")) {
-      setError("Please fill in all fields");
-      return;
-    }
-    addPatient(newPatient);
     setNewPatient({
       name: "",
       dob: "",
@@ -47,7 +35,42 @@ const Patients = ({ patients, addPatient }) => {
       email: "",
       problem: "",
     });
-    handleCloseModal();
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewPatient((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const validateForm = () => {
+    if (Object.values(newPatient).some((field) => field.trim() === "")) {
+      setError("Please fill in all fields.");
+      return false;
+    }
+    // Additional validations like email and phone can be added here.
+    return true;
+  };
+
+  const handleAddPatient = async () => {
+    if (!validateForm()) return;
+
+    setLoading(true);
+    try {
+      await addPatient(newPatient); // Assuming addPatient is an async function.
+      setNewPatient({
+        name: "",
+        dob: "",
+        gender: "",
+        phone: "",
+        email: "",
+        problem: "",
+      });
+      handleCloseModal();
+    } catch (err) {
+      setError("Failed to add patient. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const modalAnimation = useSpring({
@@ -74,24 +97,19 @@ const Patients = ({ patients, addPatient }) => {
             </div>
             <div className="patient-card-body">
               <p>
-                <FaBirthdayCake /> <span className="label">Date of Birth:</span>{" "}
-                {patient.dob}
+                <FaBirthdayCake /> <span className="label">Date of Birth:</span> {patient.dob}
               </p>
               <p>
-                <FaGenderless /> <span className="label">Gender:</span>{" "}
-                {patient.gender}
+                <FaGenderless /> <span className="label">Gender:</span> {patient.gender}
               </p>
               <p>
-                <FaPhone /> <span className="label">Phone:</span>{" "}
-                {patient.phone}
+                <FaPhone /> <span className="label">Phone:</span> {patient.phone}
               </p>
               <p>
-                <FaEnvelope /> <span className="label">Email:</span>{" "}
-                {patient.email}
+                <FaEnvelope /> <span className="label">Email:</span> {patient.email}
               </p>
               <p>
-                <FaExclamationTriangle />{" "}
-                <span className="label">Problem:</span> {patient.problem}
+                <FaExclamationTriangle /> <span className="label">Problem:</span> {patient.problem}
               </p>
             </div>
             <div className="patient-card-footer">
@@ -131,6 +149,7 @@ const Patients = ({ patients, addPatient }) => {
                     name="name"
                     value={newPatient.name}
                     onChange={handleInputChange}
+                    aria-required="true"
                   />
                 </div>
                 <div className="form-group">
@@ -141,6 +160,7 @@ const Patients = ({ patients, addPatient }) => {
                     name="dob"
                     value={newPatient.dob}
                     onChange={handleInputChange}
+                    aria-required="true"
                   />
                 </div>
                 <div className="form-group">
@@ -150,9 +170,9 @@ const Patients = ({ patients, addPatient }) => {
                     name="gender"
                     value={newPatient.gender}
                     onChange={handleInputChange}
+                    aria-required="true"
                   >
-                    <option value="">Select Gender</option>{" "}
-                    {/* Default option */}
+                    <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
@@ -166,6 +186,7 @@ const Patients = ({ patients, addPatient }) => {
                     name="phone"
                     value={newPatient.phone}
                     onChange={handleInputChange}
+                    aria-required="true"
                   />
                 </div>
                 <div className="form-group">
@@ -176,6 +197,7 @@ const Patients = ({ patients, addPatient }) => {
                     name="email"
                     value={newPatient.email}
                     onChange={handleInputChange}
+                    aria-required="true"
                   />
                 </div>
                 <div className="form-group">
@@ -186,13 +208,14 @@ const Patients = ({ patients, addPatient }) => {
                     name="problem"
                     value={newPatient.problem}
                     onChange={handleInputChange}
+                    aria-required="true"
                   />
                 </div>
               </form>
             </div>
             <div className="modal-footer">
-              <button className="save-button" onClick={handleAddPatient}>
-                Save
+              <button className="save-button" onClick={handleAddPatient} disabled={loading}>
+                {loading ? "Saving..." : "Save"}
               </button>
             </div>
           </div>

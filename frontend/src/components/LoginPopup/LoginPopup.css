@@ -1,0 +1,131 @@
+/* LoginPopup.css */
+
+.login-popup {
+    position: fixed; /* Fixed positioning to stay centered on the screen */
+    z-index: 1100; /* Higher z-index to ensure it's on top of other elements */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark semi-transparent background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+
+.login-popup-container {
+    width: max(23vw, 330px);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    animation: fadeIn 0.3s ease-out; /* Smooth fade-in animation */
+}
+
+.login-popup-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333; /* Darker text color for better readability */
+}
+
+.login-popup-title img {
+    width: 16px;
+    cursor: pointer;
+    filter: brightness(0) invert(1); /* Better visibility of the close icon */
+}
+
+.login-popup-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-popup-inputs input {
+    outline: none;
+    border: 1px solid #dcdcdc; /* Slightly lighter border */
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.login-popup-container button {
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    color: white;
+    background-color: #0275d8; /* Matching theme color */
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-popup-container button:hover {
+    background-color: #025aa5; /* Darker shade for hover effect */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.login-popup-condition {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.login-popup-condition input {
+    margin-top: 5px;
+}
+
+.login-popup p span {
+    color: #0275d8; /* Matching theme color */
+    font-weight: 500;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.panel-selection {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 2;
+  }
+  
+  .panel-selection h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .panel-selection button {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    background-color: #0275d8;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .panel-selection button:hover {
+    background-color: #025aa5;
+  }
+   

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import './Sidebar.css';
 import { FaChartLine, FaUserInjured, FaCalendarAlt, FaUserMd, FaPrescription, 
          FaVial, FaMoneyBillAlt, FaFileAlt, FaBoxes, FaCog, FaBars, FaVideo, FaUser } from 'react-icons/fa';
@@ -28,7 +28,6 @@ const Sidebar = ({ onToggle }) => {
                 <li><Link to="/reports"><FaFileAlt /> <span>Reports</span></Link></li>
                 <li><Link to="/inventory"><FaBoxes /> <span>Inventory</span></Link></li>
                 <li><Link to="/telemedicine"><FaVideo /> <span>Telemedicine</span></Link></li>
-                <li><Link to="/patient-portal"><FaUser /> <span>Patient Portal</span></Link></li>
                 <li><Link to="/settings"><FaCog /> <span>Settings</span></Link></li>
             </ul>
         </div>
