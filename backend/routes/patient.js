@@ -54,7 +54,42 @@ router.delete('/:id', async (req, res) => {
   try {
     const result = await Patient.findByIdAndDelete(req.params.id);
     if (!result) {
-      return res.status(404).json({ message: 'Patient not found' });
+      return res.status(404).json({ message: 'Patient not found' });const express = require('express');
+      const router = express.Router();
+      const Patient = require('../models/Patient'); // Make sure the path is correct
+      
+      // Get all patients
+      router.get('/', async (req, res) => {
+        try {
+          const patients = await Patient.find(); // Fetch all patients from the database
+          res.json(patients); // Return the patients as JSON
+        } catch (err) {
+          res.status(500).json({ message: err.message }); // Return error if something goes wrong
+        }
+      });
+      
+      // Add a new patient
+      router.post('/', async (req, res) => {
+        // Create a new patient instance using the request body data
+        const patient = new Patient({
+          name: req.body.name,
+          age: req.body.age,
+          gender: req.body.gender,
+          contact: req.body.contact,
+          address: req.body.address,
+          medicalHistory: req.body.medicalHistory,
+        });
+      
+        try {
+          const newPatient = await patient.save(); // Save the new patient to the database
+          res.status(201).json(newPatient); // Return the newly created patient as JSON
+        } catch (err) {
+          res.status(400).json({ message: err.message }); // Return error if something goes wrong
+        }
+      });
+      
+      module.exports = router; // Export the router to be used in the main server file
+      
     }
     res.json({ message: 'Patient deleted' });
   } catch (err) {
@@ -63,3 +98,4 @@ router.delete('/:id', async (req, res) => {
 });
 
 module.exports = router;
+
