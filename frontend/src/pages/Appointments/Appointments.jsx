@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import './Appointments.css';
 import { FaUser, FaCalendar, FaClock, FaPhone, FaSearch } from 'react-icons/fa';
+import axios from 'axios';
 
 const Appointments = ({ addAppointment }) => {
   const [appointments, setAppointments] = useState([
@@ -65,6 +66,15 @@ const Appointments = ({ addAppointment }) => {
   const filteredAppointments = appointments.filter(appointment =>
     appointment.name.toLowerCase().includes(searchTerm)
   );
+
+
+  useEffect(()=>{
+    const getData = async () => {
+      const response = await axios.get('http://localhost:5001/api/appointments/');
+      console.log(response);
+    }
+    getData();
+  },[])
 
   return (
     <div className="appointments-container">

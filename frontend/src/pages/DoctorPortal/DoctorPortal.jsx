@@ -1,11 +1,11 @@
 import React from 'react';
-import './PatientPortal.css';
+import './DoctorPortal.css';
 import { FaUser, FaCalendarAlt, FaFileAlt, FaEnvelope } from 'react-icons/fa';
 
 // PatientPortal Component
 const PatientPortal = ({ name, email, portalType }) => {
-    const isPatient = portalType === 'Patient';
-    const isDoctor = portalType === 'Doctor';
+    const isPatient = portalType === 'Doctor';
+    const isDoctor = portalType === 'Patient';
 
     // Mock data for demonstration
     const patientData = {
@@ -22,7 +22,7 @@ const PatientPortal = ({ name, email, portalType }) => {
     return (
         <div className="patient-portal">
             <header className="portal-header">
-                <h1>{isPatient ? 'Patient Portal' : 'Doctor Portal' || isDoctor ? 'Doctor Portal' : 'Patient Portal'}</h1>
+                <h1>{isPatient ? 'Patient Portal' : 'Doctor Portal'}</h1>
                 <p>Manage your health records, appointments, and messages efficiently.</p>
             </header>
             <div className="portal-content">

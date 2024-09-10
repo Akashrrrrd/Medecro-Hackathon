@@ -1,44 +1,131 @@
-import React, { useState } from 'react';
-import './LoginPopup.css';
-
+import React, { useState } from "react";
+import "./LoginPopup.css";
+import { login, signup } from "../../../firebase";
+import { useNavigate } from "react-router-dom";
 
 const LoginPopup = ({ setShowLogin, onLoginSuccess }) => {
-  const [currState, setCurrState] = useState('Login');
+  const [currState, setCurrState] = useState("Login");
   const [isPanelSelection, setIsPanelSelection] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    onLoginSuccess();
-    setIsPanelSelection(true); 
+  const handleAuthAction = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      if (currState === "Login") {
+        await login(email, password);
+      } else {
+        await signup(`${firstName} ${lastName}`, email, password);
+      }
+      setIsPanelSelection(true);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePanelSelection = (panelType) => {
+    if (typeof onLoginSuccess === "function") {
+      onLoginSuccess(panelType); // Pass the selected panel type to the parent
+    }
+    navigate(`/${panelType.toLowerCase()}-portal`);
+    setShowLogin(false);
   };
 
   return (
-    <div className='login-popup'>
-      <form className='login-popup-container'>
-        <div className='login-popup-title'>
+    <div className="login-popup">
+      <div className="login-popup-container">
+        <div className="login-popup-header">
           <h2>{currState}</h2>
-          <img onClick={() => setShowLogin(false)}  alt="Close" />
+          <button className="close-btn" onClick={() => setShowLogin(false)}>
+            &times;
+          </button>
         </div>
-        <div className='login-popup-inputs'>
-          {currState === 'Login' ? null : <input type='name' placeholder='Your Name' required />}
-          <input type='email' placeholder='Your Email' required />
-          <input type='password' placeholder='Password' required />
+        <div className="login-popup-body">
+          {currState === "Sign Up" && (
+            <>
+              <input
+                className="firstname-input"
+                placeholder="First Name"
+                required
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <input
+                className="lastname-input"
+                placeholder="Last Name"
+                required
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </>
+          )}
+          <input
+            type="email"
+            placeholder="Your Email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {error && <p className="error-message">{error}</p>}
+          <button
+            className="auth-button"
+            onClick={handleAuthAction}
+            disabled={loading}
+          >
+            {loading
+              ? "Processing..."
+              : currState === "Sign Up"
+              ? "Create Account"
+              : "Login"}
+          </button>
+          <div className="terms">
+            <input type="checkbox" id="terms" required />
+            <label htmlFor="terms">
+              By continuing, I agree to the terms of use & privacy policy.
+            </label>
+          </div>
+          <div className="switch-auth">
+            {currState === "Login" ? (
+              <p>
+                New here?{" "}
+                <span onClick={() => setCurrState("Sign Up")}>
+                  Create an Account
+                </span>
+              </p>
+            ) : (
+              <p>
+                Already have an account?{" "}
+                <span onClick={() => setCurrState("Login")}>Login here</span>
+              </p>
+            )}
+          </div>
         </div>
-        <button type="button" onClick={handleLogin}>
-          {currState === 'Sign Up' ? 'Create Account' : 'Login'}
-        </button>
-        <div className='login-popup-condition'>
-          <input type='checkbox' required />
-          <p>By continuing, I agree to the terms of use & privacy policy.</p>
-        </div>
-        {currState === 'Login'
-          ? <p>Create a New Account? <span onClick={() => setCurrState('Sign Up')}>Click here</span></p>
-          : <p>Already have an Account? <span onClick={() => setCurrState('Login')}>Login here</span></p>}
-      </form>
+      </div>
       {isPanelSelection && (
-        <div className='panel-selection'>
+        <div className="panel-selection">
           <h2>Select Your Panel</h2>
-          <button onClick={() => console.log('Patient Panel Selected')}>Patient Panel</button>
-          <button onClick={() => console.log('Doctor Panel Selected')}>Doctor Panel</button>
+          <button onClick={() => handlePanelSelection("Patient")}>
+            Patient Panel
+          </button>
+          <button onClick={() => handlePanelSelection("Doctor")}>
+            Doctor Panel
+          </button>
         </div>
       )}
     </div>

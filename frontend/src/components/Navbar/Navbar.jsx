@@ -3,19 +3,25 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { FaBell, FaUserCircle, FaQuestionCircle, FaSignOutAlt, FaMoon, FaSun } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
-import LoginPopup from '../LoginPopup/LoginPopup'; // Import LoginPopup component
+import LoginPopup from '../LoginPopup/LoginPopup';
 
 const Navbar = ({ isSidebarOpen, toggleTheme, isDarkMode }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true); // Assume user is logged in initially
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // Initially user is not logged in
     const [showLogin, setShowLogin] = useState(false); // State to manage login popup visibility
 
     const handleLogout = () => {
         // Perform logout logic here
-        setIsLoggedIn(false);
+        setIsLoggedIn(false); // Update state to reflect logged-out status
     };
 
     const handleLoginClick = () => {
         setShowLogin(true);
+    };
+
+    // Function to handle successful login
+    const handleLoginSuccess = () => {
+        setIsLoggedIn(true);
+        setShowLogin(false); // Close the login popup after successful login
     };
 
     return (
@@ -29,7 +35,6 @@ const Navbar = ({ isSidebarOpen, toggleTheme, isDarkMode }) => {
                     <FaBell /><span className="notification-badge">3</span>
                 </button>
                 {isLoggedIn && (
-                    // Wrap the user icon in a Link component to redirect to PatientPortal
                     <Link to="/patient-portal" className="icon-button">
                         <FaUserCircle />
                     </Link>
@@ -55,7 +60,9 @@ const Navbar = ({ isSidebarOpen, toggleTheme, isDarkMode }) => {
                     {isDarkMode ? <FaSun /> : <FaMoon />}
                 </button>
             </div>
-            {showLogin && !isLoggedIn && <LoginPopup setShowLogin={setShowLogin} />}
+            {showLogin && (
+                <LoginPopup setShowLogin={setShowLogin} onLoginSuccess={handleLoginSuccess} />
+            )}
         </nav>
     );
 };
