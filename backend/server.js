@@ -14,41 +14,16 @@ app.use(bodyParser.json());
 app.use(helmet());
 app.use(morgan('dev'));
 
-
-
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://aakashrajendran2004:aakashrajendran@cluster0.wu1gi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
-
-
+// MongoDB connection
+const uri = process.env.MONGODB_URI;  // Using the MONGODB_URI from .env file
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB successfully'))
+  .catch(err => console.error('Failed to connect to MongoDB', err));
 
 // Import routes
 const patientRoutes = require('./routes/patient');
 const appointmentRoutes = require('./routes/appointment');
-const doctorRoutes = require('./routes/doctor');
+const doctorRoutes = require('./routes/doctor');  // Example: Add more routes as needed
 const inventoryRoutes = require('./routes/inventory');
 const prescriptionRoutes = require('./routes/prescription');
 const medicalTestRoutes = require('./routes/medicalTest');
@@ -74,12 +49,13 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Medecro API');
 });
 
-// Error handling
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
 
+// Start server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

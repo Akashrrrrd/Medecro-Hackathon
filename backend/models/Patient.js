@@ -1,34 +1,12 @@
-const express = require('express');
-const router = express.Router();
-const Patient = require('../models/Patient'); // Make sure the path is correct
+const mongoose = require('mongoose');
 
-// Get all patients
-router.get('/', async (req, res) => {
-  try {
-    const patients = await Patient.find();
-    res.json(patients);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+const patientSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  dob: { type: Date, required: true },
+  gender: { type: String, required: true },
+  phone: { type: String, required: true },
+  email: { type: String, required: true },
+  problem: { type: String, required: true },
 });
 
-// Add a new patient
-router.post('/', async (req, res) => {
-  const patient = new Patient({
-    name: req.body.name,
-    age: req.body.age,
-    gender: req.body.gender,
-    contact: req.body.contact,
-    address: req.body.address,
-    medicalHistory: req.body.medicalHistory,
-  });
-
-  try {
-    const newPatient = await patient.save();
-    res.status(201).json(newPatient);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-
-module.exports = router;
+module.exports = mongoose.model('Patient', patientSchema);

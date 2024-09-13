@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const medicalTestSchema = new mongoose.Schema({
-  patientId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patient', required: true },
-  testName: String,
-  result: String,
-  date: Date,
+  patientName: { type: String, required: true },
+  testName: { type: String, required: true },
+  date: { type: Date, required: true },
+  result: { type: String, required: true },
 });
 
 module.exports = mongoose.model('MedicalTest', medicalTestSchema);

@@ -5,26 +5,24 @@ const Prescription = require('../models/Prescription');
 // Get all prescriptions
 router.get('/', async (req, res) => {
   try {
-    const prescriptions = await Prescription.find().populate('patientId').populate('doctorId');
+    const prescriptions = await Prescription.find();
     res.json(prescriptions);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Get a prescription by ID
-router.get('/:id', async (req, res) => {
-  try {
-    const prescription = await Prescription.findById(req.params.id).populate('patientId').populate('doctorId');
-    res.json(prescription);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// Create a new prescription
+// Add a new prescription
 router.post('/', async (req, res) => {
-  const prescription = new Prescription(req.body);
+  const { patientName, medication, dosage, instructions, date } = req.body;
+  const prescription = new Prescription({
+    patientName,
+    medication,
+    dosage,
+    instructions,
+    date
+  });
+
   try {
     const newPrescription = await prescription.save();
     res.status(201).json(newPrescription);

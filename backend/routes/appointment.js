@@ -5,9 +5,7 @@ const Appointment = require('../models/Appointment');
 // Get all appointments
 router.get('/', async (req, res) => {
   try {
-    const appointments = await Appointment.find()
-      .populate('patientId')
-      .populate('doctorId');
+    const appointments = await Appointment.find();
     res.json(appointments);
   } catch (err) {
     console.error('Error fetching appointments:', err);
@@ -18,9 +16,7 @@ router.get('/', async (req, res) => {
 // Get an appointment by ID
 router.get('/:id', async (req, res) => {
   try {
-    const appointment = await Appointment.findById(req.params.id)
-      .populate('patientId')
-      .populate('doctorId');
+    const appointment = await Appointment.findById(req.params.id);
     if (!appointment) {
       return res.status(404).json({ message: 'Appointment not found' });
     }
@@ -33,7 +29,13 @@ router.get('/:id', async (req, res) => {
 
 // Create a new appointment
 router.post('/', async (req, res) => {
-  const appointment = new Appointment(req.body);
+  const { name, date, time, phone } = req.body;
+  if (!name || !date || !time || !phone) {
+    return res.status(400).json({ message: 'Required fields missing' });
+  }
+
+  const appointment = new Appointment({ name, date, time, phone });
+
   try {
     const newAppointment = await appointment.save();
     res.status(201).json(newAppointment);
@@ -43,12 +45,10 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update an appointment
-router.patch('/:id', async (req, res) => {
+// Update an appointment by ID
+router.put('/:id', async (req, res) => {
   try {
-    const updatedAppointment = await Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true })
-      .populate('patientId')
-      .populate('doctorId');
+    const updatedAppointment = await Appointment.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!updatedAppointment) {
       return res.status(404).json({ message: 'Appointment not found' });
     }
@@ -59,7 +59,7 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-// Delete an appointment
+// Delete an appointment by ID
 router.delete('/:id', async (req, res) => {
   try {
     const deletedAppointment = await Appointment.findByIdAndDelete(req.params.id);
