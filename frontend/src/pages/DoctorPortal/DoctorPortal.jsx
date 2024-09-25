@@ -7,7 +7,6 @@ const PatientPortal = ({ name, email, portalType }) => {
     const isPatient = portalType === 'Doctor';
     const isDoctor = portalType === 'Patient';
 
-    // Mock data for demonstration
     const patientData = {
         upcomingAppointments: [
             { date: '2024-09-01', time: '10:00 AM', doctor: 'Dr. Smith' },

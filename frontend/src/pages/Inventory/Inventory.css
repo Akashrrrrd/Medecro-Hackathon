@@ -1,9 +1,10 @@
 .inventory-container {
-  padding: 20px;
-  margin-top: 60px;
-  background-color: #f4f7fa;
+  padding: 40px;
+  margin-top: 100px;
+  background-color: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
 }
 
 .inventory-header {
@@ -14,97 +15,103 @@
 }
 
 .inventory-header h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #2e3a47;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #2b2b2b;
+  margin: 0;
 }
 
 .add-item-btn {
-  font-weight: 600;
-  font-size: 16px;
-  background-color: #009688;
-  border-color: #009688;
-  border-radius: 10px;
-  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: #00796b;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.add-item-btn:hover,
-.add-item-btn:focus {
-  background-color: #00796b;
-  border-color: #00796b;
+.add-item-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .inventory-table {
   background-color: #ffffff;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  margin-bottom: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .inventory-table .ant-table-thead > tr > th {
-  background-color: #009688;
+  background-color: #00796b;
   color: #ffffff;
-  font-weight: 700;
+  font-weight: bold;
   font-size: 16px;
-  border-bottom: 2px solid #00796b;
+  border-bottom: 3px solid #004d40;
+  text-align: left;
+  padding: 12px 20px;
 }
 
 .inventory-table .ant-table-tbody > tr > td {
-  font-size: 15px;
-  color: #4a5568;
-  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #4a4a4a;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 20px;
 }
 
 .ant-modal-content {
   border-radius: 15px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  padding: 25px;
 }
 
 .ant-modal-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #2e3a47;
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #2b2b2b;
+  margin: 0;
 }
 
 .ant-form-item-label > label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #4a5568;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555555;
 }
 
 .ant-input,
 .ant-select-selector,
 .ant-input-number {
-  border-radius: 8px;
-  border-color: #d0d7de;
+  border-radius: 10px;
+  border-color: #c0c0c0;
   padding: 10px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .ant-input:hover,
 .ant-select-selector:hover,
 .ant-input-number:hover {
-  border-color: #009688;
+  border-color: #00796b;
+  box-shadow: 0 0 5px rgba(0, 121, 107, 0.2);
 }
 
 .ant-btn-primary {
-  background-color: #009688;
-  border-color: #009688;
-  font-weight: 600;
-  font-size: 16px;
-  padding: 12px 24px;
-  border-radius: 10px;
-}
-
-.ant-btn-primary:hover,
-.ant-btn-primary:focus {
   background-color: #00796b;
   border-color: #00796b;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 12px 25px;
+  border-radius: 30px;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.ant-btn-primary[disabled],
-.ant-btn-primary[disabled]:hover,
-.ant-btn-primary[disabled]:focus {
-  background-color: #e2e8f0;
-  border-color: #e2e8f0;
+.ant-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

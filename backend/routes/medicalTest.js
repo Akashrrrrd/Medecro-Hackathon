@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const MedicalTest = require('../models/MedicalTest'); // Adjust the path as needed
+const MedicalTest = require("../models/MedicalTest"); // Adjust the path as needed
 
 // GET all medical tests
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const tests = await MedicalTest.find();
     res.json(tests);
@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST a new medical test
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { patientName, testName, date, result } = req.body;
   const newTest = new MedicalTest({
     patientName,
@@ -31,9 +31,13 @@ router.post('/', async (req, res) => {
 });
 
 // PUT update an existing medical test
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    const updatedTest = await MedicalTest.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedTest = await MedicalTest.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     res.json(updatedTest);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -41,10 +45,10 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE a medical test
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await MedicalTest.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Medical test deleted' });
+    res.json({ message: "Medical test deleted" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

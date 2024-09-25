@@ -14,7 +14,24 @@ const LoginPopup = ({ setShowLogin, onLoginSuccess }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const validateInputs = () => {
+    if (currState === "Sign Up") {
+      if (!firstName || !lastName || !email || !password) {
+        setError("All fields are required.");
+        return false;
+      }
+    } else if (currState === "Login") {
+      if (!email || !password) {
+        setError("Email and password are required.");
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleAuthAction = async () => {
+    if (!validateInputs()) return;
+
     setLoading(true);
     setError("");
 
@@ -34,9 +51,9 @@ const LoginPopup = ({ setShowLogin, onLoginSuccess }) => {
 
   const handlePanelSelection = (panelType) => {
     if (typeof onLoginSuccess === "function") {
-      onLoginSuccess(panelType); // Pass the selected panel type to the parent
+      onLoginSuccess(panelType);
     }
-    navigate(`/${panelType.toLowerCase()}-portal`);
+    navigate("/patient-portal");
     setShowLogin(false);
   };
 

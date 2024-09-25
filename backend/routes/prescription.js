@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Prescription = require('../models/Prescription');
+const Prescription = require("../models/Prescription");
 
 // Get all prescriptions
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const prescriptions = await Prescription.find();
     res.json(prescriptions);
@@ -13,14 +13,14 @@ router.get('/', async (req, res) => {
 });
 
 // Add a new prescription
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   const { patientName, medication, dosage, instructions, date } = req.body;
   const prescription = new Prescription({
     patientName,
     medication,
     dosage,
     instructions,
-    date
+    date,
   });
 
   try {
@@ -32,9 +32,13 @@ router.post('/', async (req, res) => {
 });
 
 // Update a prescription
-router.patch('/:id', async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
-    const updatedPrescription = await Prescription.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updatedPrescription = await Prescription.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
     res.json(updatedPrescription);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -42,10 +46,10 @@ router.patch('/:id', async (req, res) => {
 });
 
 // Delete a prescription
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await Prescription.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Prescription deleted' });
+    res.json({ message: "Prescription deleted" });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

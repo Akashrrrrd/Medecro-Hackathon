@@ -1,62 +1,81 @@
-import React from 'react';
-import './Help.css';
+import React, { useState } from "react";
+import "./Help.css";
 
 const Help = () => {
-    return (
-        <div className="help-page">
-            <header className="help-header">
-                <h1>Help & Support</h1>
-                <p>Find answers to your questions or contact support.</p>
-            </header>
-            <div className="help-content">
-                <section className="faqs">
-                    <h2>Frequently Asked Questions</h2>
-                    <div className="faq-item">
-                        <h3>How do I reset my password?</h3>
-                        <p>To reset your password, go to the settings page and click on "Reset Password". Follow the instructions sent to your email.</p>
-                    </div>
-                    <div className="faq-item">
-                        <h3>How do I update my profile information?</h3>
-                        <p>To update your profile information, navigate to the profile settings page and edit the details you want to change. Save the changes once you're done.</p>
-                    </div>
-                    <div className="faq-item">
-                        <h3>How can I contact customer support?</h3>
-                        <p>You can contact customer support via email at support@smartclinic.com or by phone at (123) 456-7890. Our support team is available 24/7.</p>
-                    </div>
-                    <div className="faq-item">
-                        <h3>What should I do if I encounter a technical issue?</h3>
-                        <p>If you encounter a technical issue, please clear your browser cache and restart the application. If the problem persists, contact support for assistance.</p>
-                    </div>
-                    <div className="faq-item">
-                        <h3>How can I provide feedback or suggestions?</h3>
-                        <p>We value your feedback! To provide feedback or suggestions, please use the feedback form available on our website or email us directly at feedback@smartclinic.com.</p>
-                    </div>
-                </section>
-                <section className="user-guides">
-                    <h2>User Guides</h2>
-                    <ul>
-                        <li><a href="#">How to use the dashboard</a></li>
-                        <li><a href="#">Managing patient records</a></li>
-                        <li><a href="#">Scheduling appointments</a></li>
-                        <li><a href="#">Generating reports</a></li>
-                    </ul>
-                </section>
-                <section className="contact-support">
-                    <h2>Contact Support</h2>
-                    <div className="contact-info">
-                        <div className="contact-item">
-                            <span role="img" aria-label="phone">📞</span>
-                            <p>(123) 456-7890</p>
-                        </div>
-                        <div className="contact-item">
-                            <span role="img" aria-label="email">📧</span>
-                            <p>support@smartclinic.com</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    );
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const faqs = [
+    {
+      question: "What is the Clinic Management Dashboard?",
+      answer:
+        "The Clinic Management Dashboard is a platform designed to help clinic staff and doctors manage patient records, appointments, billing, and other clinic operations efficiently.",
+    },
+    {
+      question: "How do I add a new patient record?",
+      answer:
+        "To add a new patient record, go to the 'Patients' section, click 'Add New Patient,' and fill in the required information, including personal details, medical history, and contact information.",
+    },
+    {
+      question: "How can I schedule an appointment?",
+      answer:
+        "You can schedule an appointment by navigating to the 'Appointments' section, selecting an available time slot, and assigning it to a registered patient. You can also specify the reason for the appointment.",
+    },
+    {
+      question: "Can I generate billing for patient services?",
+      answer:
+        "Yes, the dashboard allows you to generate invoices for consultations, treatments, and other services provided to patients. Simply go to the 'Billing' section to create and manage invoices.",
+    },
+    {
+      question: "How do I manage inventory for medical supplies?",
+      answer:
+        "You can track and manage the clinic's medical supplies through the 'Inventory' section. It allows you to update stock levels, set alerts for low supplies, and manage orders.",
+    },
+    {
+      question: "Is there a way to track patient history?",
+      answer:
+        "Yes, the 'Patients' section includes a comprehensive history for each patient, where you can view previous appointments, diagnoses, treatments, and medical notes.",
+    },
+    {
+      question: "How secure is the patient data on the platform?",
+      answer:
+        "The Clinic Management Dashboard ensures data security by using encryption and other security measures to protect patient information from unauthorized access.",
+    },
+    {
+      question: "Can I generate reports on clinic performance?",
+      answer:
+        "Absolutely! The dashboard provides various reports, including patient flow, financial performance, and appointment statistics, available under the 'Reports' section.",
+    },
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <div className="help-section-container">
+      <h1 className="help-section-title">Help & Support</h1>
+      <div className="help-section-list">
+        {faqs.map((faq, index) => (
+          <div key={index} className="help-section-item">
+            <button
+              className={`help-section-question ${
+                openIndex === index ? "open" : ""
+              }`}
+              onClick={() => toggleFAQ(index)}
+            >
+              {faq.question}
+              <span className="help-section-icon">
+                {openIndex === index ? "−" : "+"}
+              </span>
+            </button>
+            {openIndex === index && (
+              <div className="help-section-answer">{faq.answer}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Help;

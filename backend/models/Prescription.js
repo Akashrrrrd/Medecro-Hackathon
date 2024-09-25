@@ -1,29 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const prescriptionSchema = new Schema({
   patientName: {
     type: String,
-    required: true
+    required: true,
   },
   medication: {
     type: String,
-    required: true
+    required: true,
   },
   dosage: {
     type: String,
-    required: true
+    required: true,
   },
   instructions: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    required: true
-  }
+    required: true,
+  },
 });
 
-const Prescription = mongoose.model('Prescription', prescriptionSchema);
+const Prescription = mongoose.model("Prescription", prescriptionSchema);
 
 module.exports = Prescription;

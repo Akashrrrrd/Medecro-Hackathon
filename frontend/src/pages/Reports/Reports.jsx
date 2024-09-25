@@ -1,156 +1,312 @@
-import React, { useState } from 'react';
-import './Reports.css'; // Ensure this CSS file is created and styled appropriately
-import { FaFileAlt, FaCalendarAlt, FaUser, FaMoneyBillAlt, FaChartLine, FaArrowUp, FaArrowDown } from 'react-icons/fa';
-import { Line, Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement } from 'chart.js';
+import React, { useState } from "react";
+import "./Reports.css";
+import {
+  FaUser,
+  FaCalendarAlt,
+  FaHeartbeat,
+  FaNotesMedical,
+} from "react-icons/fa";
+import { Line, Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+} from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-// Sample data for demonstration purposes
-const initialReports = [
-  { id: 1, title: 'Monthly Patient Attendance', date: '2024-08-20', type: 'Patient', description: 'Overview of patient attendance for the month.', data: { totalVisits: 120, monthlyTrend: [10, 15, 12, 14, 16, 18, 22, 25, 20, 19, 23, 21] } },
-  { id: 2, title: 'Quarterly Revenue Breakdown', date: '2024-08-21', type: 'Financial', description: 'In-depth analysis of revenue for the current quarter.', data: { totalRevenue: '$50,000', revenueTrend: [4000, 4500, 5000, 5500] } },
-  { id: 3, title: 'Appointment Scheduling Patterns', date: '2024-08-22', type: 'Operational', description: 'Analysis of appointment scheduling trends and types.', data: { totalAppointments: 85, appointmentTypes: { checkup: 50, followup: 25 } } },
-  { id: 4, title: 'Patient Visit Statistics', date: '2024-08-23', type: 'Patient', description: 'Detailed statistics on patient visits throughout the month.', data: { totalVisits: 120, monthlyTrend: [10, 15, 12, 14, 16, 18, 22, 25, 20, 19, 23, 21] } },
-  { id: 5, title: 'Current Quarter Revenue Report', date: '2024-08-24', type: 'Financial', description: 'Report on revenue performance for the current quarter.', data: { totalRevenue: '$50,000', revenueTrend: [4000, 4500, 5000, 5500] } },
-  { id: 6, title: 'Appointment Analysis Report', date: '2024-08-25', type: 'Operational', description: 'Report on various appointment types and their scheduling trends.', data: { totalAppointments: 85, appointmentTypes: { checkup: 50, followup: 25 } } },
-  { id: 7, title: 'Patient Visit Overview', date: '2024-08-26', type: 'Patient', description: 'Overview of patient visit metrics for the month.', data: { totalVisits: 120, monthlyTrend: [10, 15, 12, 14, 16, 18, 22, 25, 20, 19, 23, 21] } },
-  { id: 8, title: 'Revenue Performance Report', date: '2024-08-27', type: 'Financial', description: 'Detailed performance report on revenue for the quarter.', data: { totalRevenue: '$50,000', revenueTrend: [4000, 4500, 5000, 5500] } },
-  { id: 9, title: 'Trends in Appointment Scheduling', date: '2024-08-28', type: 'Operational', description: 'Analysis of appointment trends and scheduling patterns.', data: { totalAppointments: 85, appointmentTypes: { checkup: 50, followup: 25 } } },
-  { id: 10, title: 'Monthly Report on Patient Visits', date: '2024-08-29', type: 'Patient', description: 'Report on patient visits and monthly trends.', data: { totalVisits: 120, monthlyTrend: [10, 15, 12, 14, 16, 18, 22, 25, 20, 19, 23, 21] } },
-  { id: 11, title: 'Financial Summary for the Quarter', date: '2024-08-30', type: 'Financial', description: 'Summary of financial performance for the current quarter.', data: { totalRevenue: '$50,000', revenueTrend: [4000, 4500, 5000, 5500] } },
-  { id: 12, title: 'Appointment Trends and Analysis', date: '2024-08-31', type: 'Operational', description: 'Analysis of appointment trends and types for the month.', data: { totalAppointments: 85, appointmentTypes: { checkup: 50, followup: 25 } } }
+const initialRecords = [
+  {
+    id: 1,
+    name: "Aarav Patel",
+    dob: "1988-03-15",
+    visits: 10,
+    medicalHistory: "Type 2 Diabetes, Hypertension",
+    nextAppointment: "2024-10-05",
+    prescriptions: "Metformin, Lisinopril",
+    trends: [5, 6, 4, 5, 7, 6, 8, 7, 6, 5, 4, 5],
+  },
+  {
+    id: 2,
+    name: "Priya Sharma",
+    dob: "1992-11-22",
+    visits: 7,
+    medicalHistory: "Asthma, Allergic Rhinitis",
+    nextAppointment: "2024-09-18",
+    prescriptions: "Salbutamol, Fluticasone",
+    trends: [2, 3, 2, 4, 3, 5, 4, 3, 2, 3, 4, 3],
+  },
+  {
+    id: 3,
+    name: "Vikram Reddy",
+    dob: "1975-07-30",
+    visits: 15,
+    medicalHistory: "Coronary Artery Disease, Hyperlipidemia",
+    nextAppointment: "2024-09-25",
+    prescriptions: "Atorvastatin, Clopidogrel",
+    trends: [8, 7, 9, 8, 7, 6, 8, 7, 9, 8, 7, 8],
+  },
+  {
+    id: 4,
+    name: "Ananya Gupta",
+    dob: "1995-02-14",
+    visits: 5,
+    medicalHistory: "Migraine, Anxiety",
+    nextAppointment: "2024-10-12",
+    prescriptions: "Sumatriptan, Escitalopram",
+    trends: [3, 4, 5, 4, 6, 5, 4, 3, 5, 4, 3, 4],
+  },
+  {
+    id: 5,
+    name: "Rajesh Kumar",
+    dob: "1980-09-08",
+    visits: 12,
+    medicalHistory: "Rheumatoid Arthritis, Osteoporosis",
+    nextAppointment: "2024-09-30",
+    prescriptions: "Methotrexate, Alendronate",
+    trends: [6, 7, 5, 6, 8, 7, 6, 5, 7, 6, 8, 7],
+  },
+  {
+    id: 6,
+    name: "Neha Verma",
+    dob: "1998-12-03",
+    visits: 3,
+    medicalHistory: "Polycystic Ovary Syndrome",
+    nextAppointment: "2024-10-20",
+    prescriptions: "Metformin, Combined Oral Contraceptive",
+    trends: [1, 2, 3, 2, 4, 3, 2, 3, 4, 3, 2, 3],
+  },
+  {
+    id: 7,
+    name: "Arjun Malhotra",
+    dob: "1970-05-25",
+    visits: 20,
+    medicalHistory:
+      "Chronic Obstructive Pulmonary Disease, Gastroesophageal Reflux Disease",
+    nextAppointment: "2024-09-22",
+    prescriptions: "Tiotropium, Omeprazole",
+    trends: [9, 8, 7, 9, 8, 7, 6, 8, 7, 9, 8, 7],
+  },
+  {
+    id: 8,
+    name: "Sonia Kapoor",
+    dob: "1985-08-17",
+    visits: 8,
+    medicalHistory: "Hypothyroidism, Depression",
+    nextAppointment: "2024-10-08",
+    prescriptions: "Levothyroxine, Sertraline",
+    trends: [4, 5, 4, 3, 5, 6, 5, 4, 5, 6, 5, 4],
+  },
+  {
+    id: 9,
+    name: "Karan Singh",
+    dob: "1991-06-10",
+    visits: 4,
+    medicalHistory: "Chronic Back Pain",
+    nextAppointment: "2024-10-15",
+    prescriptions: "Ibuprofen, Physical Therapy",
+    trends: [3, 3, 4, 5, 5, 4, 3, 3, 2, 4, 3, 3],
+  },
+  {
+    id: 10,
+    name: "Riya Choudhary",
+    dob: "1995-05-25",
+    visits: 6,
+    medicalHistory: "Anemia, Hypothyroidism",
+    nextAppointment: "2024-09-28",
+    prescriptions: "Iron Supplements, Levothyroxine",
+    trends: [4, 3, 4, 5, 4, 5, 5, 4, 3, 4, 3, 5],
+  },
+  {
+    id: 11,
+    name: "Aditi Mehta",
+    dob: "1989-01-13",
+    visits: 11,
+    medicalHistory: "Gestational Diabetes, Hypertension",
+    nextAppointment: "2024-10-25",
+    prescriptions: "Metformin, Lisinopril",
+    trends: [5, 5, 6, 5, 4, 5, 6, 5, 5, 4, 5, 5],
+  },
+  {
+    id: 12,
+    name: "Nikhil Joshi",
+    dob: "1983-09-21",
+    visits: 9,
+    medicalHistory: "Seasonal Allergies, Eczema",
+    nextAppointment: "2024-09-29",
+    prescriptions: "Antihistamines, Topical Steroids",
+    trends: [2, 3, 2, 3, 4, 3, 3, 4, 2, 3, 3, 2],
+  },
 ];
 
+const Records = () => {
+  const [records, setRecords] = useState(initialRecords);
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortType, setSortType] = useState("name");
 
-const Reports = () => {
-  const [reports, setReports] = useState(initialReports);
-  const [selectedReport, setSelectedReport] = useState(null);
-  const [filter, setFilter] = useState('All');
-
-  const handleViewReport = (report) => {
-    setSelectedReport(report);
+  const handleViewDetails = (record) => {
+    setSelectedRecord(record);
   };
 
   const handleCloseDetails = () => {
-    setSelectedReport(null);
+    setSelectedRecord(null);
   };
 
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value);
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
   };
 
-  const filteredReports = reports.filter(report => filter === 'All' || report.type === filter);
+  const handleSortChange = (e) => {
+    setSortType(e.target.value);
+  };
+
+  const filteredRecords = records
+    .filter((record) =>
+      record.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => (a[sortType] > b[sortType] ? 1 : -1));
 
   return (
-    <div className="reports-container">
-      <header className="reports-header">
-        <h1><FaFileAlt /> Reports</h1>
-        <div className="filter-section">
-          <label htmlFor="report-filter">Filter by Type:</label>
-          <select id="report-filter" value={filter} onChange={handleFilterChange}>
-            <option value="All">All</option>
-            <option value="Patient">Patient</option>
-            <option value="Financial">Financial</option>
-            <option value="Operational">Operational</option>
+    <div className="records-container">
+      <header className="records-header">
+        <h1>
+          <FaUser /> Patient Records
+        </h1>
+        <div className="controls-section">
+          <input
+            type="text"
+            placeholder="Search by patient name..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="search-bar-records"
+          />
+          <select
+            value={sortType}
+            onChange={handleSortChange}
+            className="sort-dropdown"
+          >
+            <option value="name">Sort by Name</option>
+            <option value="dob">Sort by DOB</option>
+            <option value="visits">Sort by Visits</option>
           </select>
-          <button className="refresh-button">Refresh Reports</button>
         </div>
       </header>
-      <div className="reports-list">
-        {filteredReports.map(report => (
-          <div className="report-card" key={report.id}>
-            <div className="report-card-header">
-              <h2><FaChartLine /> {report.title}</h2>
-              <p><FaCalendarAlt /> {report.date}</p>
+
+      <div className="records-list">
+        {filteredRecords.map((record) => (
+          <div className="record-card" key={record.id}>
+            <div className="record-card-header">
+              <h2>
+                <FaUser /> {record.name}
+              </h2>
+              <p>
+                <FaCalendarAlt /> DOB: {record.dob}
+              </p>
             </div>
-            <div className="report-card-body">
-              <p><strong>Type:</strong> {report.type}</p>
-              <p>{report.description}</p>
+            <div className="record-card-body">
+              <p>
+                <strong>Total Visits:</strong> {record.visits}
+              </p>
+              <p>
+                <strong>Medical History:</strong> {record.medicalHistory}
+              </p>
+              <p>
+                <strong>Next Appointment:</strong> {record.nextAppointment}
+              </p>
             </div>
-            <div className="report-card-footer">
-              <button className="view-details-button" onClick={() => handleViewReport(report)}>View Details</button>
+            <div className="record-card-footer">
+              <button
+                className="view-details-button"
+                onClick={() => handleViewDetails(record)}
+              >
+                View Details
+              </button>
             </div>
           </div>
         ))}
       </div>
 
-      {selectedReport && (
-        <div className="report-details-overlay">
-          <div className="report-details-content">
+      {selectedRecord && (
+        <div className="record-details-overlay">
+          <div className="record-details-content">
             <header className="details-header">
-              <h2>{selectedReport.title}</h2>
-              <button className="close-button" onClick={handleCloseDetails}>X</button>
+              <h2>{selectedRecord.name}</h2>
+              <button className="close-button" onClick={handleCloseDetails}>
+                X
+              </button>
             </header>
             <div className="details-body">
-              <p><strong>Date:</strong> {selectedReport.date}</p>
-              <p><strong>Type:</strong> {selectedReport.type}</p>
-              <p><strong>Description:</strong> {selectedReport.description}</p>
+              <p>
+                <strong>DOB:</strong> {selectedRecord.dob}
+              </p>
+              <p>
+                <strong>Total Visits:</strong> {selectedRecord.visits}
+              </p>
+              <p>
+                <strong>Medical History:</strong>{" "}
+                {selectedRecord.medicalHistory}
+              </p>
+              <p>
+                <strong>Next Appointment:</strong>{" "}
+                {selectedRecord.nextAppointment}
+              </p>
+              <p>
+                <strong>Prescriptions:</strong> {selectedRecord.prescriptions}
+              </p>
 
               <div className="charts-container">
-                {selectedReport.data.monthlyTrend && (
+                {selectedRecord.trends && (
                   <div className="chart">
-                    <h3>Monthly Visits Trend</h3>
+                    <h3>Visit Trends</h3>
                     <Line
                       data={{
-                        labels: Array.from({ length: 12 }, (_, i) => `Month ${i + 1}`),
-                        datasets: [{
-                          label: 'Visits',
-                          data: selectedReport.data.monthlyTrend,
-                          borderColor: '#007bff',
-                          backgroundColor: 'rgba(0, 123, 255, 0.2)',
-                          borderWidth: 2
-                        }]
+                        labels: Array.from(
+                          { length: 12 },
+                          (_, i) => `Month ${i + 1}`
+                        ),
+                        datasets: [
+                          {
+                            label: "Visits",
+                            data: selectedRecord.trends,
+                            borderColor: "#28a745",
+                            backgroundColor: "rgba(40, 167, 69, 0.2)",
+                            borderWidth: 2,
+                          },
+                        ],
                       }}
                       options={{
                         responsive: true,
                         plugins: {
-                          legend: { position: 'top' },
-                          tooltip: { callbacks: { label: (context) => `${context.dataset.label}: ${context.raw}` } }
+                          legend: { position: "top" },
+                          tooltip: {
+                            callbacks: {
+                              label: (context) =>
+                                `${context.dataset.label}: ${context.raw}`,
+                            },
+                          },
                         },
                         scales: {
-                          x: { title: { display: true, text: 'Month' } },
-                          y: { title: { display: true, text: 'Number of Visits' } }
-                        }
-                      }}
-                    />
-                  </div>
-                )}
-
-                {selectedReport.data.revenueTrend && (
-                  <div className="chart">
-                    <h3>Revenue Trend</h3>
-                    <Bar
-                      data={{
-                        labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-                        datasets: [{
-                          label: 'Revenue',
-                          data: selectedReport.data.revenueTrend,
-                          backgroundColor: '#28a745',
-                          borderColor: '#218838',
-                          borderWidth: 1
-                        }]
-                      }}
-                      options={{
-                        responsive: true,
-                        plugins: {
-                          legend: { position: 'top' },
-                          tooltip: { callbacks: { label: (context) => `${context.dataset.label}: $${context.raw}` } }
+                          x: { title: { display: true, text: "Month" } },
+                          y: {
+                            title: { display: true, text: "Number of Visits" },
+                          },
                         },
-                        scales: {
-                          x: { title: { display: true, text: 'Quarter' } },
-                          y: { title: { display: true, text: 'Revenue ($)' }, beginAtZero: true }
-                        }
                       }}
                     />
-                  </div>
-                )}
-
-                {selectedReport.data.appointmentTypes && (
-                  <div className="appointment-types">
-                    <h3>Appointment Types</h3>
-                    <p><strong>Checkup:</strong> {selectedReport.data.appointmentTypes.checkup}</p>
-                    <p><strong>Follow-up:</strong> {selectedReport.data.appointmentTypes.followup}</p>
                   </div>
                 )}
               </div>
@@ -162,4 +318,4 @@ const Reports = () => {
   );
 };
 
-export default Reports;
+export default Records;

@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-// Define the schema for billing items
 const BillingItemSchema = new mongoose.Schema({
   description: { type: String, required: true },
   quantity: { type: Number, required: true },
@@ -8,7 +7,6 @@ const BillingItemSchema = new mongoose.Schema({
   totalPrice: { type: Number, required: true },
 });
 
-// Define the schema for billing
 const BillingSchema = new mongoose.Schema({
   invoiceDate: { type: Date, required: true },
   billingPeriod: {
@@ -25,4 +23,4 @@ const BillingSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
 });
 
-module.exports = mongoose.model('Billing', BillingSchema);
+module.exports = mongoose.model("Billing", BillingSchema);
